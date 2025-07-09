@@ -2,7 +2,7 @@
 
 This is a custom workflow that can be deployed to Agent Studio. This example demonstrates how to create and deploy a workflow with custom tools and agents.
 
-**NOTE: update `github_url` in `deploy.sh` to match wherever you push your repo.**
+**NOTE: update `github_url` in `deploy.sh` to match wherever you fork your repo.**
 
 ## Overview
 
