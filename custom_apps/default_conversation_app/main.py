@@ -79,10 +79,8 @@ def chat_response(message, history):
 
     # Poll for completion
     while True:
-        print("getting status")
         time.sleep(1)
         status = get_workflow_status(trace_id)
-        print(status)
         if status["complete"]:
             break
 

@@ -4,7 +4,7 @@ Example of a conversation application that uses a deployed Agent Studio conversa
 
 
 ## How to install this application
-* In an Agent Studio instance, open Agent Studio and deploy the Calculator Workflow. 
+* In an Agent Studio instance, open Agent Studio and deploy or create any Conversational workflow. 
 * In an Agent Studio enabled project, make a directory named `custom_app/` from the home directory.
 * You should now have:
 
