@@ -1,0 +1,74 @@
+{
+  "default_language_model_id": "m1",
+  "language_models": [
+    {
+      "model_id": "m1",
+      "model_name": "gpt-4o",
+      "generation_config": {
+        "do_sample": true,
+        "temperature": 0.1,
+        "max_new_tokens": 4096,
+        "top_p": 1,
+        "top_k": 50,
+        "num_beams": 1,
+        "max_length": null
+      }
+    }
+  ],
+  "tool_instances": [
+    {
+      "id": "t1",
+      "name": "Better Calculator Tool v2",
+      "python_code_file_name": "tool.py",
+      "python_requirements_file_name": "requirements.txt",
+      "source_folder_path": "calculator_tool",
+      "tool_metadata": "{\"user_params\": [], \"user_params_metadata\": {}, \"status\": \"\"}",
+      "tool_image_uri": "calculator_tool/icon.png",
+      "is_venv_tool": true
+    }
+  ],
+  "mcp_instances": [],
+  "agents": [
+    {
+      "id": "a1",
+      "name": "Better Calculator Agent #2",
+      "llm_provider_model_id": "m1",
+      "crew_ai_role": "Mathematical Calculator",
+      "crew_ai_backstory": "You can calculate complex mathematical expressions like ((5 + 3) * 2 - 4 / 2) or ((3+90/9)*2)+(8+(9*2)*1)+100 or even simple ones like 5 + 3.",
+      "crew_ai_goal": "Because LLMs are not good at math, use the tools at your disposal to correctly calculate the value of mathematical expressions given to you.",
+      "crew_ai_allow_delegation": false,
+      "crew_ai_verbose": false,
+      "crew_ai_cache": true,
+      "crew_ai_temperature": null,
+      "crew_ai_max_iter": 10,
+      "tool_instance_ids": [
+        "t1"
+      ],
+      "mcp_instance_ids": [],
+      "agent_image_uri": ""
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task1",
+      "description": "For arithmetic expression {expression} , find the result.",
+      "expected_output": "Present the result while greeting the user nicely.",
+      "assigned_agent_id": "a1"
+    }
+  ],
+  "workflow": {
+    "id": "w1",
+    "name": "Test Workflow",
+    "description": "This workflow uses a Calculator Agent to accurately evaluate mathematical expressions by leveraging Pydantic for input validation and performing basic arithmetic operations based on user-provided inputs",
+    "crew_ai_process": "sequential",
+    "agent_ids": [
+      "a1"
+    ],
+    "task_ids": [
+      "task1"
+    ],
+    "manager_agent_id": null,
+    "llm_provider_model_id": null,
+    "is_conversational": false
+  }
+}
