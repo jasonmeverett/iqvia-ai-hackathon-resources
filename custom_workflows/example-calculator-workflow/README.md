@@ -2,6 +2,8 @@
 
 This is a custom workflow that can be deployed to Agent Studio. This example demonstrates how to create and deploy a workflow with custom tools and agents.
 
+**NOTE: update `github_url` in `deploy.sh` to match wherever you push your repo.**
+
 ## Overview
 
 This project contains:
@@ -79,9 +81,21 @@ Populate your environment variables as you see fit for testing deployment:
 
 - `CDSW_APIV2_KEY`: Your Agent Studio API key
 - `MY_AGENT_STUDIO_URL`: The URL of your Agent Studio instance
-- `MY_LLM_API_KEY`: Your LLM provider API key (OpenAI in this example)
+- `MY_LLM_API_KEY`: Your LLM provider API key (Either CAII JWT Token, OpenAI API key, etc.)
 
 **DON'T FORGET TO UPDATE YOUR LLM TYPE IF NECESSARY.**
+
+Example:
+```
+        "llm_config": {
+            "m1": {
+                "model_type": "CAII",
+                "provider_model": "<input model identifier here>",
+                "api_base": "<api base of CAI model>",
+                "api_key": "${MY_LLM_API_KEY}"
+            }
+        }
+```
 
 ## Custom Tools
 

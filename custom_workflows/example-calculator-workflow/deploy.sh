@@ -46,6 +46,6 @@ EOF
 
 # Actual Agent Studio API call
 curl -X POST $MY_AGENT_STUDIO_URL/api/deploy \
-  -H "Authorization: Bearer $MY_API_KEY" \
+  -H "Authorization: Bearer $MY_CDSW_APIV2_KEY" \
   -H "Content-Type: application/json" \
   -d "$PAYLOAD"
