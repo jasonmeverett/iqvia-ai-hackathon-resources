@@ -1,6 +1,6 @@
-# Custom Calculator App
+# Conversation App
 
-Example of a custom application that uses a deployed Agent Studio workflow.
+Example of a conversation application that uses a deployed Agent Studio conversational workflow.
 
 
 ## How to install this application
@@ -13,9 +13,9 @@ agent-studio/
 custom_app/
 ```
 
-* Download `custom_calculator_app.tar.gz` from this repo, and upload this tarball to your project filesystem (the root should be `/home/cdsw`)
+* Download `conversation_app.tar.gz` from this repo, and upload this tarball to your project filesystem (the root should be `/home/cdsw`)
 * Start a new session in your project
-* In your session terminal, extract all with `tar -xzvf custom_calculator_app.tar.gz`
+* In your session terminal, extract all with `tar -xzvf conversation_app.tar.gz`
 * You should now have:
 
 ```
