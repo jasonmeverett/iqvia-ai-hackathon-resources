@@ -11,6 +11,10 @@
         {
             "name": "File DB Query",
             "directory": "tool_templates/file_db_query/"
+        },
+        {
+            "name": "Custom File DB Query",
+            "directory": "tool_templates/file_db_custom/"
         }
     ]
 }

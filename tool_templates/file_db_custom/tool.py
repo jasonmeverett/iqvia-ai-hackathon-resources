@@ -1,5 +1,5 @@
 """
-Run restricted SQL queries against a preconfigured database table. An optional describe feature is also provided to pull out to view table schema.
+Run specific SQL queries against a preconfigured database table. An optional describe feature is also provided to pull out to view table schema.
 """
 
 from pydantic import BaseModel, Field
