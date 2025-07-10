@@ -11,7 +11,7 @@ This directory contains some tool templates that you can add to an Agent Studio 
 git clone https://github.com/jasonmeverett/iqvia-ai-hackathon-resources.git
 ```
 
-* Enter into the directory:
+* Enter into the cloned directory:
 
 ```
 cd iqvia-ai-hackathon-resources/

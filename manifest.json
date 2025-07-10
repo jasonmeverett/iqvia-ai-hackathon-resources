@@ -27,6 +27,10 @@
         {
             "name": "Known Drugs Data Explorer",
             "directory": "tool_templates/known_drugs_db/"
+        },
+        {
+            "name": "Drug Targets Data Explorer",
+            "directory": "tool_templates/drug_targets_db/"
         }
     ]
 }
