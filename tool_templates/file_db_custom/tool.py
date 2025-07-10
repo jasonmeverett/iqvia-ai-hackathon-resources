@@ -82,7 +82,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
                 filter_value = args.filter_value_1
             except Exception as e:
                 print("Just using filter_value as string")
-                filter_value = args.filter_value_1
+                filter_value = f"'{args.filter_value_1}'"
             filter_clause_1 = f"WHERE {args.filter_column_1} {operation_map[args.filter_operation_1]} {filter_value} "
 
         filter_clause_2 = None
@@ -95,7 +95,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
                 filter_value = args.filter_value_2
             except Exception as e:
                 print("Just using filter_value as string")
-                filter_value = args.filter_value_2
+                filter_value = f"'{args.filter_value_2}'"
             filter_clause_2 = f"AND {args.filter_column_2} {operation_map[args.filter_operation_2]} {filter_value} "
 
         filter_clause_3 = None
@@ -108,7 +108,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
                 filter_value = args.filter_value_3  
             except Exception as e:
                 print("Just using filter_value as string")
-                filter_value = args.filter_value_3
+                filter_value = f"'{args.filter_value_3}'"
             filter_clause_3 = f"AND {args.filter_column_3} {operation_map[args.filter_operation_3]} {filter_value}"
 
         sql_query = f"SELECT {columns} FROM '{config.db_file}' " \
