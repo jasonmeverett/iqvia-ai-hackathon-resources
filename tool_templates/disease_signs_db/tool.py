@@ -124,7 +124,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
         
         max_rows = config.max_rows if config.max_rows else 10
         if args.limit:
-            sql_query += f" LIMIT {min(args.limit, max_rows)}"
+            sql_query += f" LIMIT {args.limit}"
         else:
             sql_query += f" LIMIT {max_rows}"
         
