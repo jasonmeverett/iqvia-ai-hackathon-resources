@@ -20,7 +20,7 @@ with open(manifest_file, "r") as f:
 
 # Grab the agent studio url
 resp = requests.get(
-    f"https://{os.getenv('CDSW_DOMAIN')}/api/v2/applications", 
+    f"https://{os.getenv('CDSW_DOMAIN')}/api/v2/projects/{os.getenv('CDSW_PROJECT_ID')}/applications", 
     headers={
         "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
     }
