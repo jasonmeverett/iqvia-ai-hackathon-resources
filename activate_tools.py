@@ -62,7 +62,8 @@ for tool_template in manifest['tool_templates']:
         data = requests.post(
             f"{agent_studio_endpoint}/api/grpc/addToolTemplate",
             json={
-                "tool_template_name": tool_template['name']
+                "tool_template_name": tool_template['name'],
+                "tmp_tool_image_path": f"{tool_template['directory']}/icon.png"
             },
             headers={
                 "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"

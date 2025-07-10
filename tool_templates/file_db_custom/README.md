@@ -17,6 +17,6 @@ This means that the actual DB file name (either CSV or parquet have been tested)
 ## How to Use
 
 * Add any parquet and CSV files you want right to the tool directory, next to the sample `titanic.parquet`.
-* Make sure your agent knows which table to pull out, either in the `Role`/`Goal`/`Backstory` or part of the conversation prompt itself.
+* Make sure your agent knows which table to pull from, either in the `Role`/`Goal`/`Backstory` or part of the conversation prompt itself.
 
 In this example, see that `'titanic.parquet'` is explicitly mentioned in the conversation. You can customize this tool to have a specific parquet or CSV file to read from for example.
