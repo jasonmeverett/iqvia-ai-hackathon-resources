@@ -79,5 +79,4 @@ for tool_template in manifest['tool_templates']:
     ).json()["template"]
 
     # Copy the tool template to the agent studio directory
-    print("copying tool template to agent studio directory")
     shutil.copytree(f"{tool_template['directory']}", os.path.join(agent_studio_dir, as_tool_template['source_folder_path']), dirs_exist_ok=True)
