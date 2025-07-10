@@ -72,21 +72,49 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
         columns = args.column_names if args.column_names != '*' else '*'
 
         # Handle contains operation specially
-        filter_clause = None
-        if args.filter_operation == 'contains':
-            assert args.filter_value is not None, "Filter value is required for contains operation"
-            assert args.filter_column is not None, "Filter column is required for contains operation"
+        filter_clause_1 = None
+        if args.filter_operation_1:
+            assert args.filter_value_1 is not None, "Filter value is required for contains operation"
+            assert args.filter_column_1 is not None, "Filter column is required for contains operation"
             try:
                 print("trying to parse filter_value as number")
-                float(args.filter_value)
-                filter_value = args.filter_value
+                float(args.filter_value_1)
+                filter_value = args.filter_value_1
             except Exception as e:
                 print("Just using filter_value as string")
-                filter_value = args.filter_value
+                filter_value = args.filter_value_1
+            filter_clause_1 = f"WHERE {args.filter_column_1} {operation_map[args.filter_operation_1]} {filter_value}"
 
-            filter_clause = f"WHERE {args.filter_column} {operation_map[args.filter_operation]} {filter_value}"
+        filter_clause_2 = None
+        if args.filter_operation_2:
+            assert args.filter_value_2 is not None, "Filter value is required for contains operation"
+            assert args.filter_column_2 is not None, "Filter column is required for contains operation"
+            try:
+                print("trying to parse filter_value as number")
+                float(args.filter_value_2)
+                filter_value = args.filter_value_2
+            except Exception as e:
+                print("Just using filter_value as string")
+                filter_value = args.filter_value_2
+            filter_clause_2 = f"WHERE {args.filter_column_2} {operation_map[args.filter_operation_2]} {filter_value}"
 
-        sql_query = f"SELECT {columns} FROM '{config.db_file}' " + (filter_clause if filter_clause else "")
+        filter_clause_3 = None
+        if args.filter_operation_3:
+            assert args.filter_value_3 is not None, "Filter value is required for contains operation"
+            assert args.filter_column_3 is not None, "Filter column is required for contains operation"
+            try:
+                print("trying to parse filter_value as number")
+                float(args.filter_value_3)
+                filter_value = args.filter_value_3  
+            except Exception as e:
+                print("Just using filter_value as string")
+                filter_value = args.filter_value_3
+            filter_clause_3 = f"WHERE {args.filter_column_3} {operation_map[args.filter_operation_3]} {filter_value}"
+
+        sql_query = f"SELECT {columns} FROM '{config.db_file}' " \
+            + (filter_clause_1 if filter_clause_1 else "") \
+            + (filter_clause_2 if filter_clause_2 else "") \
+            + (filter_clause_3 if filter_clause_3 else "")
         print(sql_query)
 
         # Add optional clauses
