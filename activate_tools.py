@@ -54,7 +54,7 @@ for tool_template in manifest['tool_templates']:
     else:
         print(f"Tool template {tool_template['name']} does not exist")
         # Activate the tool template
-        tool_template_id = requests.post(
+        data = requests.post(
             f"{agent_studio_endpoint}/api/grpc/addToolTemplate",
             json={
                 "tool_template_name": tool_template['name']
@@ -62,7 +62,9 @@ for tool_template in manifest['tool_templates']:
             headers={
                 "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
             }
-        ).json()["tool_template_id"]
+        ).json()
+        print(data)
+        tool_template_id = data['tool_template_id']
     
     as_tool_template = requests.get(
         f"{agent_studio_endpoint}/api/grpc/getToolTemplate?tool_template_id={tool_template_id}",
