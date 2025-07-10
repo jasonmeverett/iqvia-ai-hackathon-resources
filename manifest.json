@@ -21,7 +21,7 @@
             "directory": "tool_templates/write_markdown_to_pdf/"
         },
         {
-            "name": "Disease/Phenotype Data Explorer",
+            "name": "Disease and Phenotype Data Explorer",
             "directory": "tool_templates/biosample_db/"
         }
     ]
