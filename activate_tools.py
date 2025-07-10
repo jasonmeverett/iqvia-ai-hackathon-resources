@@ -65,6 +65,8 @@ for tool_template in manifest['tool_templates']:
         if os.path.exists(os.path.join(curdir, tool_template['directory'], "icon.png")):
             payload['tmp_tool_image_path'] = os.path.join(curdir, tool_template['directory'], "icon.png")
 
+        print(f"Payload: {payload}")
+
         # Activate the tool template
         data = requests.post(
             f"{agent_studio_endpoint}/api/grpc/addToolTemplate",
