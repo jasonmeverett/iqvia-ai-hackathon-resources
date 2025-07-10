@@ -73,7 +73,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
             try:
                 float(args.filter_value)
                 filter_value = args.filter_value
-            except ValueError:
+            except Exception as e:
                 filter_value = f"'{args.filter_value}'"
         
         sql_query = f"SELECT {columns} FROM '{config.db_file}' WHERE {args.filter_column} {operation_map[args.filter_operation]} {filter_value}"
