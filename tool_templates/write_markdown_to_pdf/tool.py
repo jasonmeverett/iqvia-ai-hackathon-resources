@@ -39,7 +39,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
     pdf = MarkdownPdf(toc_level=2, optimize=True)
     pdf.add_section(Section(args.markdown_content, toc=False))
     pdf.save(args.output_file)
-    return f"Successfully wrote markdown to {args.output_file}."
+    return f"Successfully wrote markdown to {os.path.abspath(args.output_file)}."
 
 
 
