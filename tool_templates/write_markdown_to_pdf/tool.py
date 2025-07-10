@@ -43,7 +43,6 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
 
     return {
         "directory": os.path.dirname(abspath),
-        "download_link": f"{os.getenv('CDSW_PROJECT_URL').replace('/api/v1/projects', '')}/preview/{abspath.replace('/home/cdsw/', '')}"
     }
 
 
