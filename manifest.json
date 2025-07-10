@@ -27,6 +27,10 @@
         {
             "name": "Disease Signs and Symptoms Data Explorer",
             "directory": "tool_templates/disease_signs_db/"
+        },
+        {
+            "name": "Known Drugs Data Explorer",
+            "directory": "tool_templates/known_drugs_db/"
         }
     ]
 }
