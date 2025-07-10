@@ -1,5 +1,6 @@
 """
-A simple SQL query tool that runs SQL against a local Parquet file using DuckDB. 
+A simple SQL query tool that runs SQL against a local Parquet or CSV file. The Parquet or CSV file
+should be used as the table name (example: SELECT * FROM file.parquet LIMIT 1;)
 """
 
 from pydantic import BaseModel, Field
@@ -27,12 +28,12 @@ class ToolParameters(BaseModel):
     """
     Arguments passed for each tool call.
     """
-    sql: str = Field(description="The SQL query to run on the specified Parquet file, with the table name being the name of the Parquet file.")
+    sql: str = Field(description="The SQL query to run on the specified file, with the table name being the name of the file.")
 
 
 def run_tool(config: UserParameters, args: ToolParameters) -> Any:
     """
-    Main tool logic: run SQL query against Parquet file.
+    Main tool logic: run SQL query against the file.
     """
     try:
         # Run SQL with DuckDB
