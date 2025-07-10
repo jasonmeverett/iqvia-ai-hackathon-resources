@@ -25,7 +25,8 @@ os.chdir(ROOT_DIR)
 
 
 class UserParameters(BaseModel):
-    pass
+    max_rows: Optional[int] = Field(description="The maximum number of rows to return.", default=10)
+
 
 class ToolParameters(BaseModel):
     """
@@ -125,9 +126,12 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
             direction = args.order_direction if args.order_direction else 'ASC'
             sql_query += f" ORDER BY {args.order_by} {direction}"
         
+        max_rows = config.max_rows if config.max_rows else 10
         if args.limit:
-            sql_query += f" LIMIT {args.limit}"
-        
+            sql_query += f" LIMIT {min(args.limit, max_rows)}"
+        else:
+            sql_query += f" LIMIT {max_rows}"
+
         if args.offset:
             sql_query += f" OFFSET {args.offset}"
         
