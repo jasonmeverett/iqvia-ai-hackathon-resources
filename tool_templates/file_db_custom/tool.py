@@ -96,7 +96,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
             except Exception as e:
                 print("Just using filter_value as string")
                 filter_value = args.filter_value_2
-            filter_clause_2 = f"WHERE {args.filter_column_2} {operation_map[args.filter_operation_2]} {filter_value}"
+            filter_clause_2 = f"AND {args.filter_column_2} {operation_map[args.filter_operation_2]} {filter_value}"
 
         filter_clause_3 = None
         if args.filter_operation_3:
@@ -109,7 +109,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
             except Exception as e:
                 print("Just using filter_value as string")
                 filter_value = args.filter_value_3
-            filter_clause_3 = f"WHERE {args.filter_column_3} {operation_map[args.filter_operation_3]} {filter_value}"
+            filter_clause_3 = f"AND {args.filter_column_3} {operation_map[args.filter_operation_3]} {filter_value}"
 
         sql_query = f"SELECT {columns} FROM '{config.db_file}' " \
             + (filter_clause_1 if filter_clause_1 else "") \
