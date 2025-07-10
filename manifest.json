@@ -9,12 +9,8 @@
             "directory": "tool_templates/json_reader/"
         },
         {
-            "name": "File DB Query",
-            "directory": "tool_templates/file_db_query/"
-        },
-        {
-            "name": "Custom File DB Query",
-            "directory": "tool_templates/file_db_custom/"
+            "name": "File Database Explorer",
+            "directory": "tool_templates/file_db/"
         },
         {
             "name": "Write Markdown to PDF",
