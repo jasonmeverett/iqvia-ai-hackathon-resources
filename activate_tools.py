@@ -40,7 +40,7 @@ resp = requests.get(
         "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
     }
 )
-current_tool_templates: list[dict] = resp.json()['tool_templates']
+current_tool_templates: list[dict] = resp.json()['templates']
 print(current_tool_templates)
 
 # Activate tool templates
