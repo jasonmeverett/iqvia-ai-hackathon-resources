@@ -1,7 +1,7 @@
 {
     "tool_templates": [
         {
-            "name": "IQVIA CSV Reader",
+            "name": "CSV Reader",
             "directory": "tool_templates/csv_reader/"
         }
     ]
