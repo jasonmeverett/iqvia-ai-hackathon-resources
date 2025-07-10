@@ -55,7 +55,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
     try:
         if args.describe:
             result = duckdb.sql(f"DESCRIBE '{config.db_file}'").to_df()
-            return result.to_json(orient="records", indent=2)
+            return result.to_json(orient="records")
         
         # Map operation to SQL operator
         operation_map = {
