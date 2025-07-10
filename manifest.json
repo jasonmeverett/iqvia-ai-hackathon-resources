@@ -15,6 +15,10 @@
         {
             "name": "Custom File DB Query",
             "directory": "tool_templates/file_db_custom/"
+        },
+        {
+            "name": "Write Markdown to PDF",
+            "directory": "tool_templates/write_markdown_to_pdf/"
         }
     ]
 }
