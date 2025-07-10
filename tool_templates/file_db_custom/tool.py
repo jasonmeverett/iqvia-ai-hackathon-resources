@@ -30,7 +30,7 @@ class ToolParameters(BaseModel):
     """
     Arguments passed for each tool call.
     """
-    describe: Optional[Literal['true', 'false', '']] = Field(description="Used to ONLY describe the database table. This is a boolean value to describe the database table.", default='false')
+    describe: Optional[Literal[True, False, None]] = Field(description="Used to ONLY describe the database table. This is a boolean value to describe the database table.", default=False)
     column_names: Optional[str] = Field(description="The column names of the database to return. This is a comma separated list of column names. Can also be a wildcard (*) to return all columns. Can also be a COUNT() command.", default=None)
     filter_column_1: Optional[str] = Field(description="Optional filter 1: The column to filter on. This is the column name to filter on.", default='*')
     filter_operation_1: Optional[Literal['equal_to', 'contains', 'less_than', 'greater_than', 'less_than_or_equal', 'greater_than_or_equal', 'not_equal_to']] = Field(description="Optional filter 1: The operation to use for filtering. Specifies how to compare the filter column with the filter value.", default=None)
@@ -53,7 +53,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
     Main tool logic: run SQL query against the file.
     """
     try:
-        if args.describe == 'true':
+        if args.describe:
             result = duckdb.sql(f"DESCRIBE '{config.db_file}'").to_df()
             return result.to_json(orient="records", indent=2)
         
