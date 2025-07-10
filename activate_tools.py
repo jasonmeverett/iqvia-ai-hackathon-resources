@@ -15,6 +15,7 @@ if os.path.exists("/home/cdsw/agent-studio"):
 
 # Get this dir
 curdir = os.path.abspath(str(Path(__file__).parent))
+print(f"Current directory: {curdir}")
 
 # Load the manifest.json file
 manifest_file = f"manifest.json"
