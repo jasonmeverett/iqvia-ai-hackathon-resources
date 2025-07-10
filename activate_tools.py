@@ -8,9 +8,9 @@ agent_studio_dir = "/home/cdsw"
 if os.path.exists("/home/cdsw/agent-studio"):
     agent_studio_dir = "/home/cdsw/agent-studio"
 
-# Copy tool templates
-curdir = str(Path(__file__).parent)
-shutil.copytree(f"{curdir}/tool_templates/", f"{agent_studio_dir}/studio-data/tool_templates/", dirs_exist_ok=True)
+# # Copy tool templates
+# curdir = str(Path(__file__).parent)
+# shutil.copytree(f"{curdir}/tool_templates/", f"{agent_studio_dir}/studio-data/tool_templates/", dirs_exist_ok=True)
 
 # Load the manifest.json file
 manifest_file = f"manifest.json"
@@ -45,4 +45,35 @@ print(current_tool_templates)
 
 # Activate tool templates
 for tool_template in manifest['tool_templates']:
-    print(f"Activating tool template: {tool_template['name']}")
+    
+    as_tool_template: dict = {}
+    tool_template_id: str = ""
+
+    # See if the ID of this tool template is in the current tool templates
+    if tool_template['name'] in [x['name'] for x in current_tool_templates]:
+        print(f"Tool template {tool_template['name']} already exists")
+        tool_template_id = [x['id'] for x in current_tool_templates if x['name'] == tool_template['name']][0]
+    else:
+        print(f"Tool template {tool_template['name']} does not exist")
+        # Activate the tool template
+        tool_template_id = requests.post(
+            f"{agent_studio_endpoint}/api/grpc/addToolTemplate",
+            json={
+                "tool_template_name": tool_template['name']
+            },
+            headers={
+                "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
+            }
+        ).json()["tool_template_id"]
+    
+    as_tool_template = requests.get(
+        f"{agent_studio_endpoint}/api/grpc/getToolTemplate?tool_template_id={tool_template_id}",
+        headers={
+            "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
+        }
+    ).json()["template"]
+    print(as_tool_template)
+
+    # Copy the tool template to the agent studio directory
+    print("copying tool template to agent studio directory")
+    shutil.copytree(f"{tool_template['directory']}", os.path.join(agent_studio_dir, as_tool_template['source_folder_path']), dirs_exist_ok=True)
