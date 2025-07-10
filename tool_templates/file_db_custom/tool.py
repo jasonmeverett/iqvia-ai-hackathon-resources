@@ -80,7 +80,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
 
             filter_clause = f"WHERE {args.filter_column} {operation_map[args.filter_operation]} {filter_value}"
 
-        sql_query = f"SELECT {columns} FROM '{config.db_file}' {filter_clause}"
+        sql_query = f"SELECT {columns} FROM '{config.db_file}' " + (filter_clause if filter_clause else "")
         print(sql_query)
 
         # Add optional clauses
