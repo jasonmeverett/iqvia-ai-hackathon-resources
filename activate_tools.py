@@ -25,5 +25,11 @@ resp = requests.get(
         "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
     }
 )
-applications = resp.json()
+applications: list[dict] = resp.json()['applications']
 print(applications)
+
+agent_studio_application_candidates = list(filter(lambda x: x['name'] == "Agent Studio", applications))
+assert len(agent_studio_application_candidates) == 1, "There should be exactly one Agent Studio application in the project"
+
+for tool_template in manifest['tool_templates']:
+    print(f"Activating tool template: {tool_template['name']}")
