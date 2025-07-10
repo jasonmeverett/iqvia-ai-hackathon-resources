@@ -154,5 +154,4 @@ if __name__ == "__main__":
     params = ToolParameters(**tool_dict)
 
     output = run_tool(config, params)
-    print(output)
-    # print(OUTPUT_KEY, output)
+    print(OUTPUT_KEY, output)
