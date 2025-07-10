@@ -63,7 +63,7 @@ for tool_template in manifest['tool_templates']:
             f"{agent_studio_endpoint}/api/grpc/addToolTemplate",
             json={
                 "tool_template_name": tool_template['name'],
-                "tmp_tool_image_path": f"{tool_template['directory']}/icon.png"
+                "tmp_tool_image_path": f"{tool_template['directory']}/icon.png" if os.path.exists(f"{tool_template['directory']}/icon.png") else None
             },
             headers={
                 "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
