@@ -62,6 +62,7 @@ for tool_template in manifest['tool_templates']:
         payload = {
             "tool_template_name": tool_template['name'],
         }
+        print(f"Checking for icon.png in {os.path.join(curdir, tool_template['directory'])}")
         if os.path.exists(os.path.join(curdir, tool_template['directory'], "icon.png")):
             payload['tmp_tool_image_path'] = os.path.join(curdir, tool_template['directory'], "icon.png")
 
