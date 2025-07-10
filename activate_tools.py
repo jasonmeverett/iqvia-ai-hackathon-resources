@@ -2,14 +2,15 @@ import requests
 import shutil 
 import os 
 import json
-
+from pathlib import Path
 
 agent_studio_dir = "/home/cdsw"
 if os.path.exists("/home/cdsw/agent-studio"):
     agent_studio_dir = "/home/cdsw/agent-studio"
 
 # Copy tool templates
-shutil.copytree(f"./tool_templates/*", f"{agent_studio_dir}/studio-data/tool_templates/", dirs_exist_ok=True)
+curdir = str(Path(__file__).parent)
+shutil.copytree(f"{curdir}/tool_templates/*", f"{agent_studio_dir}/studio-data/tool_templates/", dirs_exist_ok=True)
 
 # Load the manifest.json file
 manifest_file = f"manifest.json"
