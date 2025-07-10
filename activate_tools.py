@@ -1,3 +1,8 @@
+"""
+Activate all tool templates for this repo into a given agent studio instance. This script
+can be run anywhere within an agent studio project to activate all of these tool templates.
+"""
+
 import requests 
 import shutil 
 import os 

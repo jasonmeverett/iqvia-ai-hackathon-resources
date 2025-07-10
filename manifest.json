@@ -7,6 +7,10 @@
         {
             "name": "JSON Reader",
             "directory": "tool_templates/json_reader/"
+        },
+        {
+            "name": "File DB Query",
+            "directory": "tool_templates/file_db_query/"
         }
     ]
 }
