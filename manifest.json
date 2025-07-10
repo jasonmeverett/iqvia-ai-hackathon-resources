@@ -1,7 +1,7 @@
 {
     "tool_templates": [
         {
-            "name": "file_db_query",
+            "name": "file_db_query"
         }
     ]
 }
