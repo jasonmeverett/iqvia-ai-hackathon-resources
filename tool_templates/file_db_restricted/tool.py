@@ -1,5 +1,5 @@
 """
-Run restricted SQL queries against a preconfigured database table. 
+Run restricted SQL queries against a preconfigured database table. An optional describe feature is also provided to pull out to view table schema.
 """
 
 from pydantic import BaseModel, Field
@@ -30,7 +30,7 @@ class ToolParameters(BaseModel):
     """
     Arguments passed for each tool call.
     """
-    describe: Optional[bool] = Field(description="Whether to describe the database table. This is a boolean value to describe the database table.", default=False)
+    describe: Optional[bool] = Field(description="Used to ONLY describe the database table. This is a boolean value to describe the database table.", default=False)
     column_names: Optional[str] = Field(description="The column names of the database to return. This is a comma separated list of column names. Can also be a wildcard (*) to return all columns.", default=None)
     filter_column: Optional[str] = Field(description="The column to filter on. This is the column name to filter on.", default=None)
     filter_operation: Optional[Literal['equal_to', 'contains', 'less_than', 'greater_than', 'less_than_or_equal', 'greater_than_or_equal', 'not_equal_to']] = Field(description="The operation to use for filtering. Specifies how to compare the filter column with the filter value.", default=None)
