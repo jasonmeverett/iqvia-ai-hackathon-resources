@@ -22,7 +22,7 @@ class ToolParameters(BaseModel):
     an Agent calls this tool. The descriptions below are also provided to agents
     to help them make informed decisions of what to pass to the tool.
     """
-    filepath: str = Field(description="First parameter that should be passed to the tool")
+    filepath: str = Field(description="The local path to the JSON file to read.")
 
 
 def run_tool(config: UserParameters, args: ToolParameters) -> Any:

@@ -3,6 +3,10 @@
         {
             "name": "CSV Reader",
             "directory": "tool_templates/csv_reader/"
+        },
+        {
+            "name": "JSON Reader",
+            "directory": "tool_templates/json_reader/"
         }
     ]
 }
