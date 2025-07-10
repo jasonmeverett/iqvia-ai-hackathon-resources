@@ -26,7 +26,6 @@ resp = requests.get(
     }
 )
 applications: list[dict] = resp.json()['applications']
-print(applications)
 
 agent_studio_application_candidates = list(filter(lambda x: x['name'] == "Agent Studio", applications))
 assert len(agent_studio_application_candidates) == 1, "There should be exactly one Agent Studio application in the project"
@@ -41,7 +40,6 @@ resp = requests.get(
     }
 )
 current_tool_templates: list[dict] = resp.json()['templates']
-print(current_tool_templates)
 
 # Activate tool templates
 for tool_template in manifest['tool_templates']:
@@ -72,7 +70,6 @@ for tool_template in manifest['tool_templates']:
             "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
         }
     ).json()["template"]
-    print(as_tool_template)
 
     # Copy the tool template to the agent studio directory
     print("copying tool template to agent studio directory")
