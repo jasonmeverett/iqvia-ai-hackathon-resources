@@ -13,9 +13,8 @@ agent_studio_dir = "/home/cdsw"
 if os.path.exists("/home/cdsw/agent-studio"):
     agent_studio_dir = "/home/cdsw/agent-studio"
 
-# # Copy tool templates
-# curdir = str(Path(__file__).parent)
-# shutil.copytree(f"{curdir}/tool_templates/", f"{agent_studio_dir}/studio-data/tool_templates/", dirs_exist_ok=True)
+# Get this dir
+curdir = os.path.abspath(str(Path(__file__).parent))
 
 # Load the manifest.json file
 manifest_file = f"manifest.json"
@@ -63,7 +62,7 @@ for tool_template in manifest['tool_templates']:
             f"{agent_studio_endpoint}/api/grpc/addToolTemplate",
             json={
                 "tool_template_name": tool_template['name'],
-                "tmp_tool_image_path": f"{tool_template['directory']}icon.png" if os.path.exists(f"{tool_template['directory']}icon.png") else None
+                "tmp_tool_image_path": os.path.join(curdir, tool_template['directory'], "icon.png") if os.path.exists(os.path.join(curdir, tool_template['directory'], "icon.png")) else None
             },
             headers={
                 "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
