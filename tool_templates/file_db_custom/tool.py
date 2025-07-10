@@ -115,7 +115,6 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
             + (filter_clause_1 if filter_clause_1 else "") \
             + (filter_clause_2 if filter_clause_2 else "") \
             + (filter_clause_3 if filter_clause_3 else "")
-        print(sql_query)
 
         # Add optional clauses
         if args.group_by:
@@ -132,6 +131,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
             sql_query += f" OFFSET {args.offset}"
         
         # Run SQL with DuckDB
+        print(f"Running SQL query: {sql_query}")
         result = duckdb.sql(sql_query).to_df()
         return result.to_json(orient="records", indent=2)
     except Exception as e:
