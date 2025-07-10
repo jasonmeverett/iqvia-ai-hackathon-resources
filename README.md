@@ -2,12 +2,6 @@
 
 Some opinionated resources to help with the IQVIA AI Hackathon for contestants.
 
-Other docs:
-* [Tool Templates](./tool_templates)
-* [Custom Apps](./custom_apps)
-
-
-
 ## How to Install Custom Tool Templates
 
 * Start up a session within an existing Agent Studio instance
