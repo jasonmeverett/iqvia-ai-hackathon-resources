@@ -1,5 +1,5 @@
 """
-Explore information related to integration of biosample metadata about tissues or cell types derived from multiple ontologies including EFO, UBERON, CL, GO and others. 
+Explore information related to diseases or phenotypes. A disease or phenotype in the Platform is understood as any disease, phenotype, biological process or measurement that might have any type of causality relationship with a human target. The EMBL-EBI Experimental Factor Ontology (EFO) (slim version) is used as scaffold for the disease or phenotype entity. 
 """
 
 from pydantic import BaseModel, Field
