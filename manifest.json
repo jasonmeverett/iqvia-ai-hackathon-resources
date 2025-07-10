@@ -22,7 +22,7 @@
         },
         {
             "name": "Disease and Phenotype Data Explorer",
-            "directory": "tool_templates/biosample_db/"
+            "directory": "tool_templates/disease_phenotype_db/"
         }
     ]
 }
