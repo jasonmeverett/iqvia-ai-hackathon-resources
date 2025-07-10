@@ -19,6 +19,10 @@
         {
             "name": "Write Markdown to PDF",
             "directory": "tool_templates/write_markdown_to_pdf/"
+        },
+        {
+            "name": "Biosample Data Explorer",
+            "directory": "tool_templates/biosample_db/"
         }
     ]
 }
