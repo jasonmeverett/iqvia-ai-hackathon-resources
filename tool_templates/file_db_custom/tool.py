@@ -32,7 +32,7 @@ class ToolParameters(BaseModel):
     """
     describe: Optional[Literal['true', 'false']] = Field(description="Used to ONLY describe the database table. This is a boolean value to describe the database table.", default=None)
     column_names: Optional[str] = Field(description="The column names of the database to return. This is a comma separated list of column names. Can also be a wildcard (*) to return all columns.", default=None)
-    filter_column: Optional[str] = Field(description="The column to filter on. This is the column name to filter on.", default=None)
+    filter_column: Optional[str] = Field(description="The column to filter on. This is the column name to filter on.", default='*')
     filter_operation: Optional[Literal['equal_to', 'contains', 'less_than', 'greater_than', 'less_than_or_equal', 'greater_than_or_equal', 'not_equal_to']] = Field(description="The operation to use for filtering. Specifies how to compare the filter column with the filter value.", default=None)
     filter_value: Optional[Any] = Field(description="The value to filter on. This is the value to compare against using the specified operation.", default=None)
     limit: Optional[int] = Field(description="The number of rows to return. This is the number of rows to return.", default=None)
@@ -64,20 +64,25 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
         
         # Build SQL query
         columns = args.column_names if args.column_names != '*' else '*'
-        
+
         # Handle contains operation specially
+        filter_clause = None
         if args.filter_operation == 'contains':
-            filter_value = f"'%{args.filter_value}%'"
-        else:
-            # Try to parse as number, otherwise treat as string
+            assert args.filter_value is not None, "Filter value is required for contains operation"
+            assert args.filter_column is not None, "Filter column is required for contains operation"
             try:
+                print("trying to parse filter_value as number")
                 float(args.filter_value)
                 filter_value = args.filter_value
             except Exception as e:
-                filter_value = f"'{args.filter_value}'"
-        
-        sql_query = f"SELECT {columns} FROM '{config.db_file}' WHERE {args.filter_column} {operation_map[args.filter_operation]} {filter_value}"
-        
+                print("Just using filter_value as string")
+                filter_value = args.filter_value
+
+            filter_clause = f"WHERE {args.filter_column} {operation_map[args.filter_operation]} {filter_value}"
+
+        sql_query = f"SELECT {columns} FROM '{config.db_file}' {filter_clause}"
+        print(sql_query)
+
         # Add optional clauses
         if args.group_by:
             sql_query += f" GROUP BY {args.group_by}"
