@@ -1,4 +1,0 @@
-pydantic
-markdown
-html2docx
-python-docx

@@ -1,5 +1,5 @@
 """
-Write some markdown to a Word Doc .docx file relative to the workflow directory.
+Writes markdown content to a PDF file relative to the workflow directory.
 """
 
 from pydantic import BaseModel, Field
@@ -7,11 +7,10 @@ from typing import Optional, Any
 import json 
 import argparse
 from pathlib import Path
+import pandas as pd
 import sys
 import os
-import markdown
-from html2docx import html2docx
-from docx import Document
+from markdown_pdf import MarkdownPdf, Section
 
 
 # Our tool is stored in .../<workflow>/tools/<tool_name>/tool.py. So we need to go up 3 levels to get to the root of the workflow.
@@ -29,8 +28,8 @@ class ToolParameters(BaseModel):
     an Agent calls this tool. The descriptions below are also provided to agents
     to help them make informed decisions of what to pass to the tool.
     """
-    output_file: str = Field(description="The workflow directory-relative local path to the docx file to write. example: 'report.docx'")
-    markdown_content: str = Field(description="The markdown content to write to the word docx file.")
+    output_file: str = Field(description="The workflow directory-relative local path to the PDF file to write. example: 'report.pdf'")
+    markdown_content: str = Field(description="The markdown content to write to the PDF file.")
 
 
 def run_tool(config: UserParameters, args: ToolParameters) -> Any:
@@ -38,25 +37,9 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
     Main tool code logic. Anything returned from this method is returned
     from the tool back to the calling agent.
     """
-
-    # Create a Word document
-    doc = Document()
-
-    html = f"""
-    <html>
-    <head></head>
-    <body>
-        {markdown.markdown(args.markdown_content)}
-    </body>
-    </html>
-    """
-
-    # Convert HTML to DOCX
-    buf = html2docx(html, title="My Title")
-
-    # Save the document
-    with open(args.output_file, "wb") as fp:
-        fp.write(buf.getvalue())
+    pdf = MarkdownPdf(toc_level=2, optimize=True)
+    pdf.add_section(Section(args.markdown_content, toc=False))
+    pdf.save(args.output_file)
 
     return {
         "path": args.output_file,

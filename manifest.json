@@ -33,6 +33,10 @@
             "directory": "tool_templates/write_markdown_to_shared_docx/"
         },
         {
+            "name": "Write Markdown to Shared PDF",
+            "directory": "tool_templates/write_markdown_to_shared_pdf/"
+        },
+        {
             "name": "Make API Call to Cloudera AI FastAPI Application",
             "directory": "tool_templates/cai_fastapi_call/"
         },
