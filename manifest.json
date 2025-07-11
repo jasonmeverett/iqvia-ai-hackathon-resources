@@ -17,6 +17,10 @@
             "directory": "tool_templates/write_markdown_to_pdf/"
         },
         {
+            "name": "Write Markdown to Word Docx",
+            "directory": "tool_templates/write_markdown_to_docx/"
+        },
+        {
             "name": "Disease and Phenotype Data Explorer",
             "directory": "tool_templates/disease_phenotype_db/"
         },
