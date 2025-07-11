@@ -23,7 +23,7 @@ class ToolParameters(BaseModel):
     an Agent calls this tool. The descriptions below are also provided to agents
     to help them make informed decisions of what to pass to the tool.
     """
-    types: Literal["docs", "method"] = Field(description="Whether to return the OpenAPI definition, or run an HTTP method to use for the API call.", default="docs") 
+    type: Literal["docs", "method"] = Field(description="Whether to return the OpenAPI definition, or run an HTTP method to use for the API call.", default="docs") 
     route: Optional[str] = Field(description="The route of the API endpoint to call.", default="/") 
     method: Optional[Literal["GET", "POST", "PUT", "DELETE"]] = Field(description="The actualHTTP method to use for the API call if type is of type 'method'", default="GET")
     body: Optional[str] = Field(description="The body to include in the API call.", default='')
@@ -40,7 +40,7 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
     if url.endswith('/'):
         url = url[:-1]
 
-    if args.docs == "true" or args.docs == "True":
+    if args.type == "docs":
         response = requests.get(f"{url}/openapi.json", headers={'Authorization': f'Bearer {os.getenv("CDSW_APIV2_KEY")}'})
         docs = response.json()
         return docs
