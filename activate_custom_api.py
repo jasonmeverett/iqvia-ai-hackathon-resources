@@ -16,10 +16,11 @@ APPLICATION_DIR = "/home/cdsw/custom_api"
 curdir = os.path.abspath(str(Path(__file__).parent))
 print(f"Current directory: {curdir}")
 
-# Copy over the files for the custom application
-shutil.copytree(os.path.join(curdir, "custom_apps", "custom_api/"), APPLICATION_DIR, dirs_exist_ok=True)
+# # Copy over the files for the custom application
+# if os.path.exists(APPLICATION_DIR):
+#     raise RuntimeError(f"Application directory {APPLICATION_DIR} already exists, you probably don't want to delete your existing custom api :)")
 
-
+shutil.copytree(os.path.join(curdir, "custom_apps", "custom_api"), APPLICATION_DIR, dirs_exist_ok=True)
 
 
 
@@ -33,9 +34,10 @@ resp = requests.get(
 applications: list[dict] = resp.json()['applications']
 agent_studio_application_candidates = list(filter(lambda x: x['name'] == "Agent Studio", applications))
 assert len(agent_studio_application_candidates) == 1, "There should be exactly one Agent Studio application in the project"
-as_application: cmlapi.Application = agent_studio_application_candidates[0]
-runtime = as_application.runtime
-
+as_application: dict = agent_studio_application_candidates[0]
+print(as_application)
+runtime = as_application['runtime']
+print(runtime)
 
 
 
@@ -75,6 +77,6 @@ runtime = as_application.runtime
 
 
 
-# # Create the application
+# Create the application
 
 
