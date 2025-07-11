@@ -94,3 +94,6 @@ else:
     )
     print(resp.json())
     print("Application restarted")
+    print(f"You can access your API at: https://{api_application_candidates[0]['subdomain']}.{os.getenv('CDSW_DOMAIN')}")
+    print(f"You can access your API docs at: https://{api_application_candidates[0]['subdomain']}.{os.getenv('CDSW_DOMAIN')}/docs")
+    print(f"You can access your API OpenAPI definition at: https://{api_application_candidates[0]['subdomain']}.{os.getenv('CDSW_DOMAIN')}/openapi.json")
