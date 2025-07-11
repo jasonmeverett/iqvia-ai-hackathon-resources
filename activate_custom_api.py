@@ -76,7 +76,9 @@ if len(api_application_candidates) == 0:
     print(application)
     print(f"APPLICATION CREATED")
     print(f"You can access your API at: https://{application['subdomain']}.{os.getenv('CDSW_DOMAIN')}")
-    
+    print(f"You can access your API docs at: https://{application['subdomain']}.{os.getenv('CDSW_DOMAIN')}/docs")
+    print(f"You can access your API OpenAPI definition at: https://{application['subdomain']}.{os.getenv('CDSW_DOMAIN')}/openapi.json")
+
 # If it does exist, restart it
 else:
     print("Application already exists, restarting it")
