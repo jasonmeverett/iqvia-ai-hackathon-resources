@@ -17,7 +17,7 @@ curdir = os.path.abspath(str(Path(__file__).parent))
 print(f"Current directory: {curdir}")
 
 # Copy over the files for the custom application
-shutil.copytree(os.path.join(curdir, "custom_apps", "custom_api"), APPLICATION_DIR, dirs_exist_ok=True)
+shutil.copytree(os.path.join(curdir, "custom_apps", "custom_api/"), APPLICATION_DIR, dirs_exist_ok=True)
 
 
 
