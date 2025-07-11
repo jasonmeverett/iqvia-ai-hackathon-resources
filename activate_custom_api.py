@@ -72,8 +72,11 @@ if len(api_application_candidates) == 0:
             "script": "custom_api/run.py"
         }
     )
-    print(resp.json())
-    print("Application created")
+    application = resp.json()
+    print(application)
+    print(f"APPLICATION CREATED")
+    print(f"You can access your API at: https://{application['subdomain']}.{os.getenv('CDSW_DOMAIN')}")
+    
 # If it does exist, restart it
 else:
     print("Application already exists, restarting it")
