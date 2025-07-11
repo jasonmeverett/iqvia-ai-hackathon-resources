@@ -21,6 +21,18 @@
             "directory": "tool_templates/write_markdown_to_docx/"
         },
         {
+            "name": "Read Shared PDF to Markdown",
+            "directory": "tool_templates/read_shared_pdf_to_markdown/"
+        },
+        {
+            "name": "Read Shared Docx to Markdown",
+            "directory": "tool_templates/read_shared_docx_to_markdown/"
+        },
+        {
+            "name": "Write Markdown to Shared Word Docx",
+            "directory": "tool_templates/write_markdown_to_shared_docx/"
+        },
+        {
             "name": "Make API Call to Cloudera AI FastAPI Application",
             "directory": "tool_templates/cai_fastapi_call/"
         },
