@@ -23,9 +23,9 @@ class ToolParameters(BaseModel):
     an Agent calls this tool. The descriptions below are also provided to agents
     to help them make informed decisions of what to pass to the tool.
     """
-    docs: Optional[Literal["true", "True", ""]] = Field(description="Optionally read the OpenAPI definition for this endpoint if you're unfamiliar with the methods available.", default="") 
+    types: Literal["docs", "method"] = Field(description="Whether to return the OpenAPI definition, or run an HTTP method to use for the API call.", default="docs") 
     route: Optional[str] = Field(description="The route of the API endpoint to call.", default="/") 
-    method: Optional[Literal["GET", "POST", "PUT", "DELETE"]] = Field(description="The HTTP method to use for the API call.", default="GET")
+    method: Optional[Literal["GET", "POST", "PUT", "DELETE"]] = Field(description="The actualHTTP method to use for the API call if type is of type 'method'", default="GET")
     body: Optional[str] = Field(description="The body to include in the API call.", default='')
 
 
