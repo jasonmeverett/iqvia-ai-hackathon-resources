@@ -29,8 +29,8 @@ class ToolParameters(BaseModel):
     an Agent calls this tool. The descriptions below are also provided to agents
     to help them make informed decisions of what to pass to the tool.
     """
-    output_file: str = Field(description="The local path to the PDF file to write. example: 'report.pdf'")
-    markdown_content: str = Field(description="The markdown content to write to the PDF file.")
+    output_file: str = Field(description="The local path to the docx file to write. example: 'report.docx'")
+    markdown_content: str = Field(description="The markdown content to write to the word docx file.")
 
 
 def run_tool(config: UserParameters, args: ToolParameters) -> Any:
