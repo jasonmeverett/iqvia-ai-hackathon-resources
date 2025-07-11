@@ -21,6 +21,10 @@
             "directory": "tool_templates/write_markdown_to_docx/"
         },
         {
+            "name": "Make API Call to Cloudera AI FastAPI Application",
+            "directory": "tool_templates/cai_fastapi_call/"
+        },
+        {
             "name": "Disease and Phenotype Data Explorer",
             "directory": "tool_templates/disease_phenotype_db/"
         },
