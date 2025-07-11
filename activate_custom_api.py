@@ -67,7 +67,6 @@ if len(api_application_candidates) == 0:
             "subdomain": APPLICATION_SUBDOMAIN,
             "cpu": 2,
             "memory": 4,
-            "bypass_authentication": True,
             "description": "Custom FastAPI served as a CAI Application",
             "project_id": os.getenv('CDSW_PROJECT_ID'),
             "script": "/home/cdsw/custom_api/run.py"
