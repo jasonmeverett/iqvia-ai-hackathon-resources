@@ -9,6 +9,7 @@ These are a set of helper tools that you can use to build your workflows, alongs
 ## How to Install Custom Tool Templates
 
 * Start up a session within an existing Agent Studio instance
+* Once the session starts, open a terminal under "New Terminal", seen in the top menu bar of the session window
 * Run this in a terminal:
 
 ```
