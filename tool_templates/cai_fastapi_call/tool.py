@@ -1,5 +1,5 @@
 """
-Make an API call to a Cloudera AI Application that hosts an API endpoint.
+Make an API call to a Cloudera AI Application that hosts a FastAPI endpoint.
 """
 
 from pydantic import BaseModel, Field
@@ -23,8 +23,9 @@ class ToolParameters(BaseModel):
     an Agent calls this tool. The descriptions below are also provided to agents
     to help them make informed decisions of what to pass to the tool.
     """
-    route: str = Field(description="The route of the API endpoint to call.")
-    method: Literal["GET", "POST", "PUT", "DELETE"] = Field(description="The HTTP method to use for the API call.", default="GET")
+    docs: Optional[Literal["true", "True", ""]] = Field(description="Optionally read the OpenAPI definition for this endpoint if you're unfamiliar with the methods available.", default="") 
+    route: Optional[str] = Field(description="The route of the API endpoint to call.", default="/") 
+    method: Optional[Literal["GET", "POST", "PUT", "DELETE"]] = Field(description="The HTTP method to use for the API call.", default="GET")
     body: Optional[str] = Field(description="The body to include in the API call.", default='')
 
 
@@ -38,6 +39,11 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
     url = config.url
     if url.endswith('/'):
         url = url[:-1]
+
+    if args.docs == "true" or args.docs == "True":
+        response = requests.get(f"{url}/openapi.json", headers={'Authorization': f'Bearer {os.getenv("CDSW_APIV2_KEY")}'})
+        docs = response.json()
+        return docs
 
     # Add leading slash to route
     route = args.route
