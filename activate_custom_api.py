@@ -8,6 +8,7 @@ import shutil
 import cmlapi 
 
 
+APPLICATION_SUBDOMAIN = "custom-api"
 APPLICATION_NAME = "Custom API"
 APPLICATION_DIR = "/home/cdsw/custom_api"
 
@@ -36,47 +37,53 @@ agent_studio_application_candidates = list(filter(lambda x: x['name'] == "Agent 
 assert len(agent_studio_application_candidates) == 1, "There should be exactly one Agent Studio application in the project"
 as_application: dict = agent_studio_application_candidates[0]
 print(as_application)
-runtime = as_application['runtime']
-print(runtime)
+runtime_identifier = as_application['runtime_identifier']
 
 
 
+# Grab the application if it already exists
+resp = requests.get(
+    f"https://{os.getenv('CDSW_DOMAIN')}/api/v2/projects/{os.getenv('CDSW_PROJECT_ID')}/applications?page_size=10000", 
+    headers={
+        "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
+    }
+)
+applications: list[dict] = resp.json()['applications']
 
+api_application_candidates = list(filter(lambda x: x['name'] == APPLICATION_NAME, applications))
 
-
-
-
-
-
-# # Grab the application if it already exists
-# resp = requests.get(
-#     f"https://{os.getenv('CDSW_DOMAIN')}/api/v2/projects/{os.getenv('CDSW_PROJECT_ID')}/applications?page_size=10000", 
-#     headers={
-#         "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
-#     }
-# )
-# applications: list[dict] = resp.json()['applications']
-
-# api_application_candidates = list(filter(lambda x: x['name'] == APPLICATION_NAME, applications))
-
-# # If the application doesn't exist, create it
-# if len(api_application_candidates) == 0:
-#     # Create the application
-#     resp = requests.post(
-#         f"https://{os.getenv('CDSW_DOMAIN')}/api/v2/projects/{os.getenv('CDSW_PROJECT_ID')}/applications",
-#         headers={
-#             "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
-#         }
-#     )
-# # If it does exist, restart it
-# else:
-#     assert len(api_application_candidates) == 1, "There should be exactly one Agent Studio application in the project"
-#     api_application_endpoint = f"https://{api_application_candidates[0]['subdomain']}.{os.getenv('CDSW_DOMAIN')}"
-#     print(f"API application endpoint: {api_application_endpoint}")
-
-
-
-
-# Create the application
-
-
+# If the application doesn't exist, create it
+if len(api_application_candidates) == 0:
+    # Create the application
+    print("Creating application")
+    resp = requests.post(
+        f"https://{os.getenv('CDSW_DOMAIN')}/api/v2/projects/{os.getenv('CDSW_PROJECT_ID')}/applications",
+        headers={
+            "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
+        },
+        json={
+            "name": APPLICATION_NAME,
+            "runtime_identifier": runtime_identifier,
+            "subdomain": APPLICATION_SUBDOMAIN,
+            "cpu": 2,
+            "memory": 4,
+            "bypass_authentication": True,
+            "description": "Custom FastAPI served as a CAI Application",
+            "project_id": os.getenv('CDSW_PROJECT_ID'),
+            "script": "/home/cdsw/custom_api/run.py"
+        }
+    )
+    print(resp.json())
+    print("Application created")
+# If it does exist, restart it
+else:
+    print("Application already exists, restarting it")
+    assert len(api_application_candidates) == 1, "There should be exactly one Agent Studio application in the project"
+    resp = requests.post(
+        f"https://{os.getenv('CDSW_DOMAIN')}/api/v2/projects/{os.getenv('CDSW_PROJECT_ID')}/applications/{api_application_candidates[0]['id']}:restart",
+        headers={
+            "Authorization": f"Bearer {os.getenv('CDSW_APIV2_KEY')}"
+        }
+    )
+    print(resp.json())
+    print("Application restarted")
