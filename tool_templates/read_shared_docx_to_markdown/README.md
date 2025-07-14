@@ -1,3 +1,3 @@
-# Write Markdown to Microsoft Word Docx
+# Read Shared Microsoft Word Docx to Markdown
 
-Write some markdown to a Word Doc .docx file.
+Read shared Docx files and retrive them relative to the workflow directory.
